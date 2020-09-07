@@ -5,6 +5,7 @@ const AnagramForm = () => {
   const [anagramInput1, setAnagramInput1] = useState([]);
   const [anagramInput2, setAnagramInput2] = useState([]);
   const [anagramList, setAnagramList] = useState([]);
+  const [sortedField, setSortedField] = useState("asc");
 
   const isAnagram = (str1, str2) => {
     if (typeof str1 !== "string" || typeof str2 !== "string")
@@ -17,6 +18,18 @@ const AnagramForm = () => {
       return str1.includes(character);
     });
     return findAnagram;
+  };
+
+  const sorted =
+    anagramList &&
+    anagramList.sort((a, b) => {
+      const isReversedAnagram = sortedField === "asc" ? 1 : -1;
+      //   console.log(isReversed); newTimeStamp
+      return isReversedAnagram * a.newTimeStamp.localeCompare(b.newTimeStamp);
+    });
+
+  const onSort = (sortedField) => {
+    setSortedField(sortedField);
   };
 
   const handlesAnagramChange1 = (event) => {
@@ -33,10 +46,9 @@ const AnagramForm = () => {
     let year = oldTimeStamp.getFullYear();
     let month = oldTimeStamp.getMonth();
     let day = oldTimeStamp.getDate();
+    let minutes = oldTimeStamp.getMinutes();
 
-    let newTimeStamp = `${day}/${month}/${year}`;
-
-    // console.log(newTimeStamp);
+    let newTimeStamp = `${day}/${month}/${year} ${minutes}`;
 
     event.preventDefault();
     firebase
@@ -70,22 +82,22 @@ const AnagramForm = () => {
   }
   const newTodos = useLogs();
 
-  console.log(anagramList);
-
   return (
     <div>
       <input type="text" onChange={handlesAnagramChange1} />
       <input type="text" onChange={handlesAnagramChange2} />
       <button onClick={handlesNewLog}>Log anagram</button>
+      <button onClick={() => onSort("desc")}>Newest logs</button>
+      <button onClick={() => onSort("asc")}>oldest logs</button>
       {isAnagram(anagramInput1, anagramInput2) === false ? (
         <p>False</p>
       ) : (
         <p>True</p>
       )}
       {anagramList &&
-        anagramList.map((data) => {
+        sorted.map((data) => {
           return (
-            <ul>
+            <ul key={data.id}>
               <li>
                 {data.anagramInput1} {data.anagramInput2}
                 {data.trueOrFalseAnagram}
