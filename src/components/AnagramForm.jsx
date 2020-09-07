@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import firebase from "../firebase";
 
 const AnagramForm = () => {
   const [anagramInput1, setAnagramInput1] = useState([]);
@@ -25,6 +26,7 @@ const AnagramForm = () => {
   const handlesAnagramChange2 = (event) => {
     setAnagramInput2(event.target.value);
   };
+
   return (
     <div>
       <input type="text" onChange={handlesAnagramChange1} />
