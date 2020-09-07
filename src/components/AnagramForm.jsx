@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import firebase from "../firebase";
 
 const AnagramForm = () => {
@@ -27,16 +27,73 @@ const AnagramForm = () => {
     setAnagramInput2(event.target.value);
   };
 
+  function handlesNewLog(event) {
+    let oldTimeStamp = new Date();
+
+    let year = oldTimeStamp.getFullYear();
+    let month = oldTimeStamp.getMonth();
+    let day = oldTimeStamp.getDate();
+
+    let newTimeStamp = `${day}/${month}/${year}`;
+
+    // console.log(newTimeStamp);
+
+    event.preventDefault();
+    firebase
+      .firestore()
+      .collection("item")
+      .add({
+        anagramInput1,
+        anagramInput2,
+        newTimeStamp,
+        trueOrFalseAnagram: isAnagram(anagramInput1, anagramInput2),
+      });
+  }
+
+  const [todos, setTodos] = useState([]);
+  function useLogs() {
+    useEffect(() => {
+      const unsubscribe = firebase
+        .firestore()
+        .collection("item")
+        // .orderBy("created", "desc")
+        .onSnapshot((snapshot) => {
+          const newLogs = snapshot.docs.map((doc) => ({
+            id: doc.id,
+            ...doc.data(),
+          }));
+          setAnagramList(newLogs);
+        });
+      return () => unsubscribe();
+    }, []);
+    return todos;
+  }
+  const newTodos = useLogs();
+
+  console.log(anagramList);
+
   return (
     <div>
       <input type="text" onChange={handlesAnagramChange1} />
       <input type="text" onChange={handlesAnagramChange2} />
-      <button>Log anagram</button>
+      <button onClick={handlesNewLog}>Log anagram</button>
       {isAnagram(anagramInput1, anagramInput2) === false ? (
         <p>False</p>
       ) : (
         <p>True</p>
       )}
+      {anagramList &&
+        anagramList.map((data) => {
+          return (
+            <ul>
+              <li>
+                {data.anagramInput1} {data.anagramInput2}
+                {data.trueOrFalseAnagram}
+              </li>
+              <li> {data.newTimeStamp}</li>
+            </ul>
+          );
+        })}
     </div>
   );
 };
