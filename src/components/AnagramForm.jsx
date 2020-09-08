@@ -46,9 +46,10 @@ const AnagramForm = () => {
     let year = oldTimeStamp.getFullYear();
     let month = oldTimeStamp.getMonth();
     let day = oldTimeStamp.getDate();
+    let hour = oldTimeStamp.getHours();
     let minutes = oldTimeStamp.getMinutes();
 
-    let newTimeStamp = `${day}/${month}/${year} ${minutes}`;
+    let newTimeStamp = `${day}/${month}/${year} ${hour}:${minutes}`;
 
     event.preventDefault();
     firebase
@@ -99,10 +100,10 @@ const AnagramForm = () => {
           return (
             <ul key={data.id}>
               <li>
-                {data.anagramInput1} {data.anagramInput2}
-                {data.trueOrFalseAnagram}
+                The word {data.anagramInput1} compared to {data.anagramInput2}{" "}
+                returned a {data.trueOrFalseAnagram.toString()} result
               </li>
-              <li> {data.newTimeStamp}</li>
+              <li> Logged at: {data.newTimeStamp}</li>
             </ul>
           );
         })}

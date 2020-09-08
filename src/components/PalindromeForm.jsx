@@ -87,10 +87,11 @@ const PalindromeForm = () => {
         sorted.map((data) => {
           return (
             <ul key={data.id}>
-              <li>{data.palindromeInput}</li>
-              <li>{data.timestamp}</li>
-              <li>{isPalindrome(palindromeInputBox)}</li>
-              <li></li>
+              <li>
+                The word {data.palindromeInput} returned a{" "}
+                {data.trueOrFalsePalindrome.toString()} result
+              </li>
+              <li>Logged at: {data.timestamp}</li>
             </ul>
           );
         })}
