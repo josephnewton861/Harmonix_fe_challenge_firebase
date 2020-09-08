@@ -64,7 +64,7 @@ const AnagramForm = () => {
       });
   }
 
-  const [anagrams, setTodos] = useState([]);
+  const [anagrams] = useState([]);
   function useLogs() {
     useEffect(() => {
       const unsubscribe = firebase

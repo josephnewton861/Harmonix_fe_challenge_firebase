@@ -56,7 +56,7 @@ const PalindromeForm = () => {
       });
   }
 
-  const [palindromes, setTodos] = useState([]);
+  const [palindromes] = useState([]);
   function useLogs() {
     useEffect(() => {
       const unsubscribe = firebase
