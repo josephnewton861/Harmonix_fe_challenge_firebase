@@ -103,9 +103,13 @@ const AnagramForm = () => {
       ) : (
         <p className="resultTrue">Output = True</p>
       )}
-      <Button onClick={() => setAnagramShowList(!showAnagramList)}>
+      <Button
+        variant="secondary"
+        onClick={() => setAnagramShowList(!showAnagramList)}
+      >
         Show anagram list
       </Button>
+      <br></br>
       <Button className="sort" variant="info" onClick={() => onSort("desc")}>
         Newest logs
       </Button>

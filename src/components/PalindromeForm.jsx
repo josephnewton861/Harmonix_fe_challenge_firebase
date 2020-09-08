@@ -93,10 +93,12 @@ const PalindromeForm = () => {
       )}
       <Button
         className="showAndHide"
+        variant="secondary"
         onClick={() => setPalindromeShowList(!showPalindromeList)}
       >
         Show previous logs
       </Button>
+      <br></br>
       <Button className="sort" variant="info" onClick={() => onSort("desc")}>
         Newest logs
       </Button>
