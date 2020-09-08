@@ -4,11 +4,11 @@ import { faLaptop } from "@fortawesome/free-solid-svg-icons";
 
 const Header = () => {
   return (
-    <div className="header">
-      <h1>
+    <div className="nav">
+      <p className="header">
         Harmonix code challenge{" "}
         <FontAwesomeIcon className="icon" size="lg" icon={faLaptop} />
-      </h1>
+      </p>
     </div>
   );
 };

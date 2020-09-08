@@ -65,7 +65,7 @@ const AnagramForm = () => {
       });
   }
 
-  const [todos, setTodos] = useState([]);
+  const [anagrams, setTodos] = useState([]);
   function useLogs() {
     useEffect(() => {
       const unsubscribe = firebase
@@ -81,12 +81,17 @@ const AnagramForm = () => {
         });
       return () => unsubscribe();
     }, []);
-    return todos;
+    return anagrams;
   }
-  const newTodos = useLogs();
+  useLogs();
 
   return (
     <div>
+      <p className="h4">
+        Enter two words into the input boxes to see if the words are anagrams of
+        one another{" "}
+        <em>(a word that can be spelled left to right or right to left)</em>
+      </p>
       <input
         className="anagramInput"
         type="text"
@@ -123,8 +128,9 @@ const AnagramForm = () => {
           return (
             <ul className="unList" key={data.id}>
               <li>
-                The word {data.anagramInput1} compared to {data.anagramInput2}{" "}
-                returned a {data.trueOrFalseAnagram.toString()} result
+                The word <strong>{data.anagramInput1}</strong> compared to{" "}
+                <strong>{data.anagramInput2}</strong> returned a{" "}
+                <strong>{data.trueOrFalseAnagram.toString()}</strong> result
               </li>
               <li> Logged at: {data.newTimeStamp}</li>
             </ul>

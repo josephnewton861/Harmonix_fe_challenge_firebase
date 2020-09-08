@@ -56,7 +56,7 @@ const PalindromeForm = () => {
       });
   }
 
-  const [todos, setTodos] = useState([]);
+  const [palindromes, setTodos] = useState([]);
   function useLogs() {
     useEffect(() => {
       const unsubscribe = firebase
@@ -72,12 +72,16 @@ const PalindromeForm = () => {
         });
       return () => unsubscribe();
     }, []);
-    return todos;
+    return palindromes;
   }
-  const newTodos = useLogs();
+  useLogs();
 
   return (
     <div>
+      <p className="h4">
+        Enter a word into the input box to see if its a palindrome{" "}
+        <em>(word thats spelt backwards is the same as it is forwards)</em>
+      </p>
       <input
         className="palindromeInput"
         type="text"
@@ -111,8 +115,8 @@ const PalindromeForm = () => {
           return (
             <ul className="unList" key={data.id}>
               <li>
-                The word {data.palindromeInput} returned a{" "}
-                {data.trueOrFalsePalindrome.toString()} result
+                The word <strong>{data.palindromeInput}</strong> returned a
+                <strong> {data.trueOrFalsePalindrome.toString()}</strong> result
               </li>
               <li>Logged at: {data.timestamp}</li>
             </ul>

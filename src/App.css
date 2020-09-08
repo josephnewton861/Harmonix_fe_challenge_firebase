@@ -2,10 +2,15 @@
   text-align: center;
 }
 
-.header {
+.nav {
   background-color: black;
   color: antiquewhite;
   height: 4.5rem;
+}
+
+.header {
+  font-size: 2.5em;
+  margin: auto;
 }
 
 .main {
@@ -55,9 +60,54 @@
 }
 
 li {
-  font-size: 1.5em;
+  font-size: 1.3em;
 }
 
 .icon {
   margin-top: 0.2em;
+}
+
+.h4 {
+  padding-top: 1em;
+}
+
+@media only screen and (max-width: 580px) {
+  .header {
+    font-size: 1.7em;
+    margin: auto;
+  }
+  li {
+    font-size: 1.2em;
+  }
+  .anagramInput {
+    width: 30%;
+  }
+  .resultTrue {
+    font-size: 2em;
+  }
+  .resultFalse {
+    font-size: 2em;
+  }
+  .h4 {
+    font-size: 1.5em;
+  }
+}
+
+@media only screen and (max-width: 450px) {
+  .header {
+    font-size: 1.3em;
+    margin: auto;
+  }
+  .anagramInput {
+    width: 30%;
+  }
+  .resultTrue {
+    font-size: 1.5em;
+  }
+  .resultFalse {
+    font-size: 1.5em;
+  }
+  .h4 {
+    font-size: 1em;
+  }
 }
