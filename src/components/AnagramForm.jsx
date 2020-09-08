@@ -26,7 +26,6 @@ const AnagramForm = () => {
     anagramList &&
     anagramList.sort((a, b) => {
       const isReversedAnagram = sortedField === "asc" ? 1 : -1;
-      //   console.log(isReversed); newTimeStamp
       return isReversedAnagram * a.newTimeStamp.localeCompare(b.newTimeStamp);
     });
 
