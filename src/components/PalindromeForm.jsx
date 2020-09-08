@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import firebase from "../firebase";
+import { Button } from "react-bootstrap";
 
 const PalindromeForm = () => {
   const [palindromeInputBox, setPalindromeInputBox] = useState([]);
@@ -43,8 +44,6 @@ const PalindromeForm = () => {
 
     let newTimeStamp = `${day}/${month}/${year} ${hours}:${minutes}`;
 
-    // console.log(newTimeStamp);
-
     event.preventDefault();
     firebase
       .firestore()
@@ -79,9 +78,16 @@ const PalindromeForm = () => {
   return (
     <div>
       <input type="text" onChange={handlesPalindromeChange} />
-      <button onClick={handlesNewLog}>Log palindrome</button>
-      <button onClick={() => onSort("desc")}>Newest logs</button>
-      <button onClick={() => onSort("asc")}>oldest logs</button>
+      <Button variant="primary" onClick={handlesNewLog}>
+        Log palindrome
+      </Button>
+      <br></br>
+      <Button variant="info" onClick={() => onSort("desc")}>
+        Newest logs
+      </Button>
+      <Button variant="info" onClick={() => onSort("asc")}>
+        oldest logs
+      </Button>
       {isPalindrome(palindromeInputBox) === false ? <p>False</p> : <p>True</p>}
       {palindromeList &&
         sorted.map((data) => {

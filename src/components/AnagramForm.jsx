@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import firebase from "../firebase";
+import { Button } from "react-bootstrap";
 
 const AnagramForm = () => {
   const [anagramInput1, setAnagramInput1] = useState([]);
@@ -87,9 +88,14 @@ const AnagramForm = () => {
     <div>
       <input type="text" onChange={handlesAnagramChange1} />
       <input type="text" onChange={handlesAnagramChange2} />
-      <button onClick={handlesNewLog}>Log anagram</button>
-      <button onClick={() => onSort("desc")}>Newest logs</button>
-      <button onClick={() => onSort("asc")}>oldest logs</button>
+      <Button onClick={handlesNewLog}>Log anagram</Button>
+      <br></br>
+      <Button variant="info" onClick={() => onSort("desc")}>
+        Newest logs
+      </Button>
+      <Button variant="info" onClick={() => onSort("asc")}>
+        oldest logs
+      </Button>
       {isAnagram(anagramInput1, anagramInput2) === false ? (
         <p>False</p>
       ) : (
