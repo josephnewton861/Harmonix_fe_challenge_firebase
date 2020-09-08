@@ -6,6 +6,7 @@ const PalindromeForm = () => {
   const [palindromeInputBox, setPalindromeInputBox] = useState([]);
   const [palindromeList, setPalindromeList] = useState([]);
   const [sortedField, setSortedField] = useState("asc");
+  const [showPalindromeList, setPalindromeShowList] = useState(false);
 
   const isPalindrome = (str) => {
     if (typeof str !== "string") return "Input requires a string";
@@ -77,22 +78,36 @@ const PalindromeForm = () => {
 
   return (
     <div>
-      <input type="text" onChange={handlesPalindromeChange} />
+      <input
+        className="palindromeInput"
+        type="text"
+        onChange={handlesPalindromeChange}
+      />
       <Button variant="primary" onClick={handlesNewLog}>
         Log palindrome
       </Button>
-      <br></br>
-      <Button variant="info" onClick={() => onSort("desc")}>
+      {isPalindrome(palindromeInputBox) === false ? (
+        <p className="resultFalse">Output = False</p>
+      ) : (
+        <p className="resultTrue">Output = True</p>
+      )}
+      <Button
+        className="showAndHide"
+        onClick={() => setPalindromeShowList(!showPalindromeList)}
+      >
+        Show previous logs
+      </Button>
+      <Button className="sort" variant="info" onClick={() => onSort("desc")}>
         Newest logs
       </Button>
-      <Button variant="info" onClick={() => onSort("asc")}>
+      <Button className="sort" variant="info" onClick={() => onSort("asc")}>
         oldest logs
       </Button>
-      {isPalindrome(palindromeInputBox) === false ? <p>False</p> : <p>True</p>}
-      {palindromeList &&
+      {showPalindromeList &&
+        palindromeList &&
         sorted.map((data) => {
           return (
-            <ul key={data.id}>
+            <ul className="unList" key={data.id}>
               <li>
                 The word {data.palindromeInput} returned a{" "}
                 {data.trueOrFalsePalindrome.toString()} result

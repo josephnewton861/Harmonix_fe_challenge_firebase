@@ -7,6 +7,7 @@ const AnagramForm = () => {
   const [anagramInput2, setAnagramInput2] = useState([]);
   const [anagramList, setAnagramList] = useState([]);
   const [sortedField, setSortedField] = useState("asc");
+  const [showAnagramList, setAnagramShowList] = useState(false);
 
   const isAnagram = (str1, str2) => {
     if (typeof str1 !== "string" || typeof str2 !== "string")
@@ -86,25 +87,37 @@ const AnagramForm = () => {
 
   return (
     <div>
-      <input type="text" onChange={handlesAnagramChange1} />
-      <input type="text" onChange={handlesAnagramChange2} />
+      <input
+        className="anagramInput"
+        type="text"
+        onChange={handlesAnagramChange1}
+      />
+      <input
+        className="anagramInput"
+        type="text"
+        onChange={handlesAnagramChange2}
+      />
       <Button onClick={handlesNewLog}>Log anagram</Button>
-      <br></br>
-      <Button variant="info" onClick={() => onSort("desc")}>
+      {isAnagram(anagramInput1, anagramInput2) === false ? (
+        <p className="resultFalse">Output = False</p>
+      ) : (
+        <p className="resultTrue">Output = True</p>
+      )}
+      <Button onClick={() => setAnagramShowList(!showAnagramList)}>
+        Show anagram list
+      </Button>
+      <Button className="sort" variant="info" onClick={() => onSort("desc")}>
         Newest logs
       </Button>
-      <Button variant="info" onClick={() => onSort("asc")}>
+      <Button className="sort" variant="info" onClick={() => onSort("asc")}>
         oldest logs
       </Button>
-      {isAnagram(anagramInput1, anagramInput2) === false ? (
-        <p>False</p>
-      ) : (
-        <p>True</p>
-      )}
-      {anagramList &&
+
+      {showAnagramList &&
+        anagramList &&
         sorted.map((data) => {
           return (
-            <ul key={data.id}>
+            <ul className="unList" key={data.id}>
               <li>
                 The word {data.anagramInput1} compared to {data.anagramInput2}{" "}
                 returned a {data.trueOrFalseAnagram.toString()} result

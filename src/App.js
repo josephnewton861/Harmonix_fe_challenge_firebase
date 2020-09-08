@@ -9,8 +9,10 @@ function App() {
   return (
     <div className="App">
       <Header />
-      <PalindromeForm />
-      <AnagramForm />
+      <main className="main">
+        <PalindromeForm />
+        <AnagramForm />
+      </main>
     </div>
   );
 }
